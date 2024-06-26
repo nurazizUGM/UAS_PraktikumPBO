@@ -35,10 +35,9 @@ public class Player extends Entity implements Action {
     }
 
     public void respawn() {
+        isDied = haveWeapon = false;
         x = 50;
         y = 50;
-        isDied = false;
-        haveWeapon = false;
     }
 
     public void getImage() {
@@ -83,6 +82,7 @@ public class Player extends Entity implements Action {
                     Chest chest = (Chest) collidedObject;
                     if (!chest.isOpen) {
                         chest.open(this);
+                        gp.score += 10;
                     }
                     break;
                 case "portal":
@@ -97,6 +97,7 @@ public class Player extends Entity implements Action {
         if (collidedMonster != null) {
             if (haveWeapon) {
                 attack(collidedMonster);
+                gp.score += 50;
             } else {
                 isDied = true;
             }

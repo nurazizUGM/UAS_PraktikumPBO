@@ -39,6 +39,7 @@ public class GamePanel extends JPanel implements Runnable {
     public List<Monster> monsters = new ArrayList<>();
     public int timeElapsed = 0;
     public int score = 0;
+    public int finalScore = 0;
 
     public boolean isMenu = true;
     public boolean isPaused = false;
@@ -56,16 +57,20 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame() {
+
         mapNumber = new Random().nextInt(1, 3);
         tileManager.load(mapNumber);
         assetSetter.setObject(mapNumber);
         player.respawn();
 
+        score = timeElapsed = 0;
+        finalScore = -1;
+        isMenu = isPaused = isGameOver = isFinished = false;
+
         System.out.println("Game start with map " + mapNumber);
     }
 
     public void restart() {
-        isMenu = isPaused = isGameOver = isFinished = false;
         objects.clear();
         monsters.clear();
         setupGame();
@@ -77,19 +82,24 @@ public class GamePanel extends JPanel implements Runnable {
         double nextDrawTime = System.nanoTime() + drawInterval;
 
         long nextFrameTime = System.currentTimeMillis() + 1000;
-        int frames = 0;
+        // int frames = 0;
         while (gameThread != null) {
+            if (isFinished && finalScore == -1) {
+                finalScore = score * 10000 / timeElapsed / 60;
+            }
+
             if (System.nanoTime() >= nextDrawTime) {
                 nextDrawTime += drawInterval;
-                frames++;
+                // frames++;
                 update();
                 repaint();
             }
 
             if (System.currentTimeMillis() >= nextFrameTime) {
+                timeElapsed++;
                 nextFrameTime += 1000;
                 // System.out.println("FPS: " + frames);
-                frames = 0;
+                // frames = 0;
             }
 
         }

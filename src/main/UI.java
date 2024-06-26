@@ -48,6 +48,10 @@ public class UI {
             String message = "You Win!";
             g2.drawString(message, getCenteredX(message, g2), y);
 
+            y += gp.tileSize;
+            message = "Score: " + gp.score;
+            g2.drawString(message, getCenteredX(message, g2), y);
+
             y += gp.tileSize * 2;
             message = "New Game";
             g2.drawString(message, getCenteredX(message, g2), y);
