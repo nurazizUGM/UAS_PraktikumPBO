@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 import object.Chest;
+import object.SuperObject;
 
 public class Player extends Entity {
     GamePanel gp;
@@ -62,14 +63,23 @@ public class Player extends Entity {
 
         collisionOn = false;
         gp.collisionChecker.checkTile(this);
-        int collidedObject = gp.collisionChecker.checkObject(this);
+        SuperObject collidedObject = gp.collisionChecker.checkObject(this);
 
-        // check if the player collides with a chest
-        if (collidedObject != -1 && gp.objects[collidedObject] instanceof Chest) {
-            Chest chest = (Chest) gp.objects[collidedObject];
-            if (!chest.isOpen) {
-                chest.open(this);
-                System.out.println("open chest");
+        // check if the player collides with an object
+        if (collidedObject != null) {
+            switch (collidedObject.name) {
+                case "chest":
+                    Chest chest = (Chest) collidedObject;
+                    if (!chest.isOpen) {
+                        chest.open(this);
+                        System.out.println("open chest");
+                    }
+                    break;
+                case "portal":
+                    gp.isFinished = true;
+                    break;
+                default:
+                    break;
             }
         }
         if (collisionOn == false && isMoving) {

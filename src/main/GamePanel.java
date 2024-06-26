@@ -22,8 +22,9 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenHeight = tileSize * maxScreenRow;
     public final int maxFps = 60;
 
+    UI ui = new UI(this);
     Thread gameThread;
-    KeyHandler keyHandler = new KeyHandler();
+    KeyHandler keyHandler = new KeyHandler(this);
 
     public TileManager tileManager = new TileManager(this);
     public CollisionChecker collisionChecker = new CollisionChecker(this);
@@ -31,6 +32,9 @@ public class GamePanel extends JPanel implements Runnable {
     public AssetSetter assetSetter = new AssetSetter(this);
     public Player player = new Player(this, keyHandler);
     public SuperObject objects[] = new SuperObject[10];
+
+    public boolean isPaused = true;
+    public boolean isFinished = false;
 
     GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -74,7 +78,9 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        player.update();
+        if (!isPaused) {
+            player.update();
+        }
     }
 
     public void paintComponent(Graphics g) {
@@ -87,6 +93,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
         player.draw(g2);
+        ui.draw(g2);
         g2.dispose();
     }
 }

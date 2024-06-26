@@ -3,6 +3,7 @@ package main;
 import java.awt.Rectangle;
 
 import entity.Entity;
+import object.SuperObject;
 
 public class CollisionChecker {
     GamePanel gp;
@@ -54,51 +55,53 @@ public class CollisionChecker {
         }
     }
 
-    public int checkObject(Entity entity) {
-        int objectIndex = -1;
+    public SuperObject checkObject(Entity entity) {
+        SuperObject collidedObject = null;
         for (int i = 0; i < gp.objects.length; i++) {
-            if (gp.objects[i] != null) {
+            SuperObject object = gp.objects[i];
+            if (object != null) {
                 // get entity's bounds
                 Rectangle entityBounds = new Rectangle(entity.bounds.x + entity.x, entity.bounds.y + entity.y,
                         entity.bounds.width, entity.bounds.height);
 
                 // get object's bounds
-                Rectangle objectBounds = new Rectangle(gp.objects[i].x + gp.objects[i].bounds.x,
-                        gp.objects[i].y + gp.objects[i].bounds.y, gp.objects[i].bounds.width,
-                        gp.objects[i].bounds.height);
-
+                Rectangle objectBounds = new Rectangle(object.x + object.bounds.x,
+                        object.y + object.bounds.y, object.bounds.width,
+                        object.bounds.height);
+                System.out.println(object.name + "Bounds: " + objectBounds);
+                System.out.println("entityBounds: " + entityBounds);
                 switch (entity.direction) {
                     case "up":
                         entityBounds.y -= entity.speed;
                         if (entityBounds.intersects(objectBounds)) {
                             entity.collisionOn = true;
-                            objectIndex = i;
+                            collidedObject = object;
                         }
                         break;
                     case "down":
                         entityBounds.y += entity.speed;
                         if (entityBounds.intersects(objectBounds)) {
                             entity.collisionOn = true;
-                            objectIndex = i;
+                            collidedObject = object;
                         }
                         break;
                     case "left":
                         entityBounds.x -= entity.speed;
                         if (entityBounds.intersects(objectBounds)) {
                             entity.collisionOn = true;
-                            objectIndex = i;
+                            collidedObject = object;
                         }
                         break;
                     case "right":
                         entityBounds.x += entity.speed;
                         if (entityBounds.intersects(objectBounds)) {
                             entity.collisionOn = true;
-                            objectIndex = i;
+                            collidedObject = object;
                         }
                         break;
                 }
             }
         }
-        return objectIndex;
+        return collidedObject;
     }
 }
