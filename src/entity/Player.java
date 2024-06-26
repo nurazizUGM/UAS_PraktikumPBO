@@ -85,12 +85,10 @@ public class Player extends Entity {
 
         Monster collidedMonster = gp.collisionChecker.checkMonster(this);
         if (collidedMonster != null) {
-            System.out.println("Player collided with monster");
             if (haveWeapon) {
                 collidedMonster.kill();
             } else {
                 gp.isGameOver = true;
-                gp.isPaused = true;
             }
         }
 

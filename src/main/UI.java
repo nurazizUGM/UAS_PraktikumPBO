@@ -28,6 +28,12 @@ public class UI {
             String message = "FINISHED";
             g2.drawString(message, gp.screenWidth / 2 - g2.getFontMetrics().stringWidth(message) / 2,
                     gp.screenHeight / 2 + g2.getFontMetrics().getHeight() / 4);
+        } else if (gp.isGameOver) {
+            g2.setFont(arial_40);
+            g2.setColor(Color.white);
+            String message = "GAME OVER";
+            g2.drawString(message, gp.screenWidth / 2 - g2.getFontMetrics().stringWidth(message) / 2,
+                    gp.screenHeight / 2 + g2.getFontMetrics().getHeight() / 4);
         }
     }
 }
