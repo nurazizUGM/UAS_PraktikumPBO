@@ -60,6 +60,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void restart() {
         isGameOver = isFinished = isPaused = false;
+        mapNumber = new Random().nextInt(1, 3);
         objects.clear();
         monsters.clear();
         player.respawn();
