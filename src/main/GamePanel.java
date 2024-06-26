@@ -7,7 +7,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import entity.Entity;
+import entity.Monster;
 import entity.Player;
 import object.SuperObject;
 import tile.TileManager;
@@ -33,7 +33,7 @@ public class GamePanel extends JPanel implements Runnable {
     public AssetSetter assetSetter = new AssetSetter(this);
     public Player player = new Player(this, keyHandler);
     public SuperObject objects[] = new SuperObject[10];
-    public Entity monsters[] = new Entity[10];
+    public Monster monsters[] = new Monster[10];
 
     public boolean isPaused = true;
     public boolean isFinished = false;
@@ -83,6 +83,11 @@ public class GamePanel extends JPanel implements Runnable {
     public void update() {
         if (!isPaused) {
             player.update();
+            for (int i = 0; i < monsters.length; i++) {
+                if (monsters[i] != null) {
+                    monsters[i].update();
+                }
+            }
         }
     }
 

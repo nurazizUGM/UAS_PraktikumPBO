@@ -21,6 +21,5 @@ public class AssetSetter {
     public void setMonster() {
         gp.monsters[0] = new Monster(gp, 10 * gp.tileSize, 5 * gp.tileSize);
         gp.monsters[1] = new Monster(gp, 8 * gp.tileSize, 5 * gp.tileSize);
-        System.out.println("Monster set");
     }
 }

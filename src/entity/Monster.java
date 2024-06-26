@@ -31,6 +31,35 @@ public class Monster extends Entity {
         }
     }
 
+    public void update() {
+        if (x > gp.player.x) {
+            direction = "left";
+            x -= speed;
+        }
+        if (x < gp.player.x) {
+            direction = "right";
+            x += speed;
+        }
+        if (y > gp.player.y) {
+            direction = "up";
+            y -= speed;
+        }
+        if (y < gp.player.y) {
+            direction = "down";
+            y += speed;
+        }
+
+        spriteCounter++;
+        if (spriteCounter > 12) {
+            if (spriteNum == 1) {
+                spriteNum = 2;
+            } else {
+                spriteNum = 1;
+            }
+            spriteCounter = 0;
+        }
+    }
+
     public void draw(Graphics2D g2) {
         BufferedImage image = null;
         if (spriteNum == 1) {
