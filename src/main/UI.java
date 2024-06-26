@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 public class UI {
     GamePanel gp;
     Font arial_40 = new Font("Arial", Font.PLAIN, 40);
+    Font arial_24 = new Font("Arial", Font.PLAIN, 24);
     public int menu = 0;
 
     public UI(GamePanel gp) {
@@ -105,6 +106,11 @@ public class UI {
             if (menu == 1) {
                 g2.drawString(">", getCenteredX(message, g2) - 30, y);
             }
+        } else {
+            g2.setFont(arial_24);
+            g2.setColor(Color.white);
+            String message = "Killed Monsters: " + gp.killedMonsters;
+            g2.drawString(message, 1 * gp.tileSize, 1 * gp.tileSize);
         }
     }
 

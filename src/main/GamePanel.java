@@ -40,6 +40,7 @@ public class GamePanel extends JPanel implements Runnable {
     public int timeElapsed = 0;
     public int score = 0;
     public int finalScore = 0;
+    public int killedMonsters = 0;
 
     public boolean isMenu = true;
     public boolean isPaused = false;
@@ -62,7 +63,7 @@ public class GamePanel extends JPanel implements Runnable {
         assetSetter.setObject(mapNumber);
         player.respawn();
 
-        score = timeElapsed = 0;
+        killedMonsters = score = timeElapsed = 0;
         finalScore = -1;
         isPaused = isGameOver = isFinished = false;
 
