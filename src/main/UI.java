@@ -53,6 +53,10 @@ public class UI {
             message = "Score: " + gp.score;
             g2.drawString(message, getCenteredX(message, g2), y);
 
+            y += gp.tileSize;
+            message = "Top Score: " + gp.getTopScore();
+            g2.drawString(message, getCenteredX(message, g2), y);
+
             y += gp.tileSize * 2;
             message = "New Game";
             g2.drawString(message, getCenteredX(message, g2), y);

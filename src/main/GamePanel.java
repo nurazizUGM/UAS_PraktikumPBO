@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.io.BufferedReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -41,6 +44,7 @@ public class GamePanel extends JPanel implements Runnable {
     public int score = 0;
     public int finalScore = 0;
     public int killedMonsters = 0;
+    private int topScore;
 
     public boolean isMenu = true;
     public boolean isPaused = false;
@@ -62,6 +66,14 @@ public class GamePanel extends JPanel implements Runnable {
         tileManager.load(mapNumber);
         assetSetter.setObject(mapNumber);
         player.respawn();
+
+        try {
+            BufferedReader scoreReader = new BufferedReader(
+                    Files.newBufferedReader(Paths.get("src/resources/score.txt")));
+            topScore = Integer.parseInt(scoreReader.readLine());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         killedMonsters = score = timeElapsed = 0;
         finalScore = -1;
@@ -87,6 +99,13 @@ public class GamePanel extends JPanel implements Runnable {
         while (gameThread != null) {
             if (isFinished && finalScore == -1 && timeElapsed != 0) {
                 finalScore = score * 10000 / timeElapsed / 60;
+                if (finalScore > topScore) {
+                    try {
+                        Files.write(Paths.get("src/resources/score.txt"), String.valueOf(finalScore).getBytes());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             }
 
             if (System.nanoTime() >= nextDrawTime) {
@@ -129,5 +148,9 @@ public class GamePanel extends JPanel implements Runnable {
 
         ui.draw(g2);
         g2.dispose();
+    }
+
+    public int getTopScore() {
+        return topScore;
     }
 }
