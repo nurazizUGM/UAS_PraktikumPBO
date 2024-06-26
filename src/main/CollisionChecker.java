@@ -69,9 +69,6 @@ public class CollisionChecker {
                         object.y + object.bounds.y, object.bounds.width,
                         object.bounds.height);
 
-                // System.out.println(object.name + "Bounds: " + objectBounds);
-                // System.out.println("entityBounds: " + entityBounds);
-
                 switch (entity.direction) {
                     case "up":
                         entityBounds.y -= entity.speed;

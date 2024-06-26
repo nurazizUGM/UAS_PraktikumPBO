@@ -26,13 +26,12 @@ public class TileManager {
     public TileManager(GamePanel gp) {
         this.gp = gp;
         mapTileNum = new int[gp.maxScreenCol][gp.maxScreenRow];
-        getTileImage();
-        loadMap();
     }
 
-    public void loadMap() {
+    public void load(int mapNumber) {
+        getTileImage();
         try {
-            InputStream is = getClass().getResourceAsStream("/resources/maps/1.txt");
+            InputStream is = getClass().getResourceAsStream("/resources/maps/" + mapNumber + "/map.txt");
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             int col = 0;
             int row = 0;

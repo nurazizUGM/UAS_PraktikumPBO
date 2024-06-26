@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.JPanel;
 
@@ -41,6 +42,7 @@ public class GamePanel extends JPanel implements Runnable {
     public boolean isPaused = false;
     public boolean isGameOver = false;
     public boolean isFinished = false;
+    int mapNumber = new Random().nextInt(1, 3);
 
     GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -48,10 +50,12 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
+        System.out.println("Map Number: " + mapNumber);
     }
 
     public void setupGame() {
-        assetSetter.setObject();
+        tileManager.load(mapNumber);
+        assetSetter.setObject(mapNumber);
     }
 
     public void startGameThread() {

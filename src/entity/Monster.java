@@ -59,8 +59,6 @@ public class Monster extends Entity {
                         x += speed;
                         break;
                 }
-            } else {
-                System.out.println("Monster collided");
             }
         }
 

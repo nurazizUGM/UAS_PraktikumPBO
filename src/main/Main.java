@@ -10,8 +10,8 @@ public class Main {
         window.setTitle("Dungeon Game");
 
         GamePanel gamePanel = new GamePanel();
-        gamePanel.setupGame();
         gamePanel.startGameThread();
+        gamePanel.setupGame();
 
         window.add(gamePanel);
         window.pack();

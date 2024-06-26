@@ -1,7 +1,0 @@
-chest 2 3
-chest 6 3
-chest 4 8
-portal 15 5
-portal 15 6
-monster 10 5
-monster 8 5

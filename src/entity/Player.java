@@ -72,7 +72,6 @@ public class Player extends Entity {
                     Chest chest = (Chest) collidedObject;
                     if (!chest.isOpen) {
                         chest.open(this);
-                        System.out.println("open chest");
                     }
                     break;
                 case "portal":

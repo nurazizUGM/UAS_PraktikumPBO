@@ -15,10 +15,10 @@ public class AssetSetter {
         this.gp = gp;
     }
 
-    public void setObject() {
+    public void setObject(int mapNumber) {
         try {
             BufferedReader objectReader = new BufferedReader(
-                    Files.newBufferedReader(Paths.get("src/resources/maps/1.object.txt")));
+                    Files.newBufferedReader(Paths.get("src/resources/maps/" + mapNumber + "/object.txt")));
             int i = 0;
             while (true) {
                 String line = objectReader.readLine();
