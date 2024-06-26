@@ -22,11 +22,13 @@ public class Monster extends Entity {
         this.x = x;
         this.y = y;
         getImage();
+
+        direction = "down";
+        speed = 1;
     }
 
     public void kill() {
         isDied = true;
-        collisionOn = false;
     }
 
     public void getImage() {
@@ -40,36 +42,50 @@ public class Monster extends Entity {
 
     public void update() {
         if (!isDied) {
+            gp.collisionChecker.checkTile(this);
+            gp.collisionChecker.checkObject(this);
+            if (!collisionOn) {
+                switch (direction) {
+                    case "up":
+                        y -= speed;
+                        break;
+                    case "down":
+                        y += speed;
+                        break;
+                    case "left":
+                        x -= speed;
+                        break;
+                    case "right":
+                        x += speed;
+                        break;
+                }
+            } else {
+                System.out.println("Monster collided");
+            }
+        }
 
-            int randMove = new Random().nextInt(4);
+        spriteCounter++;
+        if (spriteCounter > 12) {
+            if (spriteNum == 1) {
+                spriteNum = 2;
+            } else {
+                spriteNum = 1;
+            }
+            spriteCounter = 0;
 
-            switch (randMove) {
+            switch (new Random().nextInt(4)) {
                 case 0:
-                    direction = "right";
-                    x += speed;
+                    direction = "up";
                     break;
                 case 1:
-                    direction = "left";
-                    x -= speed;
+                    direction = "down";
                     break;
                 case 2:
-                    direction = "up";
-                    y += speed;
+                    direction = "left";
                     break;
                 case 3:
-                    direction = "down";
-                    y -= speed;
+                    direction = "right";
                     break;
-            }
-
-            spriteCounter++;
-            if (spriteCounter > 12) {
-                if (spriteNum == 1) {
-                    spriteNum = 2;
-                } else {
-                    spriteNum = 1;
-                }
-                spriteCounter = 0;
             }
         }
     }

@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -32,8 +34,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public AssetSetter assetSetter = new AssetSetter(this);
     public Player player = new Player(this, keyHandler);
-    public SuperObject objects[] = new SuperObject[10];
-    public Monster monsters[] = new Monster[10];
+    public List<SuperObject> objects = new ArrayList<>();
+    public List<Monster> monsters = new ArrayList<>();
 
     public boolean isPaused = true;
     public boolean isGameOver = false;
@@ -49,7 +51,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setupGame() {
         assetSetter.setObject();
-        assetSetter.setMonster();
     }
 
     public void startGameThread() {
@@ -84,11 +85,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void update() {
         if (!isPaused && !isGameOver && !isFinished) {
             player.update();
-            for (int i = 0; i < monsters.length; i++) {
-                if (monsters[i] != null) {
-                    monsters[i].update();
-                }
-            }
+            monsters.forEach(m -> m.update());
         }
     }
 
@@ -96,16 +93,8 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         tileManager.draw(g2);
-        for (int i = 0; i < objects.length; i++) {
-            if (objects[i] != null) {
-                objects[i].draw(g2, this);
-            }
-        }
-        for (int i = 0; i < monsters.length; i++) {
-            if (monsters[i] != null) {
-                monsters[i].draw(g2);
-            }
-        }
+        objects.forEach(o -> o.draw(g2, this));
+        monsters.forEach(m -> m.draw(g2));
 
         player.draw(g2);
         ui.draw(g2);

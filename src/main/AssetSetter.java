@@ -1,5 +1,9 @@
 package main;
 
+import java.io.BufferedReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import entity.Monster;
 import object.Chest;
 import object.Portal;
@@ -12,14 +16,36 @@ public class AssetSetter {
     }
 
     public void setObject() {
-        gp.objects[0] = new Chest(2 * gp.tileSize, 3 * gp.tileSize);
-        gp.objects[1] = new Chest(6 * gp.tileSize, 3 * gp.tileSize);
-        gp.objects[2] = new Portal(15 * gp.tileSize, 5 * gp.tileSize);
-        gp.objects[3] = new Portal(15 * gp.tileSize, 6 * gp.tileSize);
-    }
+        try {
+            BufferedReader objectReader = new BufferedReader(
+                    Files.newBufferedReader(Paths.get("src/resources/maps/1.object.txt")));
+            int i = 0;
+            while (true) {
+                String line = objectReader.readLine();
+                if (line == null) {
+                    break;
+                }
+                String[] numbers = line.split(" ");
+                int x = Integer.parseInt(numbers[1]) * gp.tileSize;
+                int y = Integer.parseInt(numbers[2]) * gp.tileSize;
+                System.out.println(numbers[0] + " " + x + " " + y);
 
-    public void setMonster() {
-        gp.monsters[0] = new Monster(gp, 10 * gp.tileSize, 5 * gp.tileSize);
-        gp.monsters[1] = new Monster(gp, 8 * gp.tileSize, 5 * gp.tileSize);
+                switch (numbers[0]) {
+                    case "chest":
+                        gp.objects.add(new Chest(x, y));
+                        break;
+                    case "portal":
+                        gp.objects.add(new Portal(x, y));
+                        break;
+                    case "monster":
+                        gp.monsters.add(new Monster(gp, x, y));
+                        break;
+                }
+
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
     }
 }

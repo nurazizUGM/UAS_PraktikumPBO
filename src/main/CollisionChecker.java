@@ -58,8 +58,7 @@ public class CollisionChecker {
 
     public SuperObject checkObject(Entity entity) {
         SuperObject collidedObject = null;
-        for (int i = 0; i < gp.objects.length; i++) {
-            SuperObject object = gp.objects[i];
+        for (SuperObject object : gp.objects) {
             if (object != null) {
                 // get entity's bounds
                 Rectangle entityBounds = new Rectangle(entity.bounds.x + entity.x, entity.bounds.y + entity.y,
@@ -110,8 +109,7 @@ public class CollisionChecker {
 
     public Monster checkMonster(Entity entity) {
         Monster collidedMonster = null;
-        for (int i = 0; i < gp.monsters.length; i++) {
-            Monster monster = gp.monsters[i];
+        for (Monster monster : gp.monsters) {
             if (monster != null && !monster.isDied) {
                 // get entity's bounds
                 Rectangle entityBounds = new Rectangle(entity.bounds.x + entity.x, entity.bounds.y + entity.y,
