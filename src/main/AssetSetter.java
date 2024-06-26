@@ -28,7 +28,6 @@ public class AssetSetter {
                 String[] numbers = line.split(" ");
                 int x = Integer.parseInt(numbers[1]) * gp.tileSize;
                 int y = Integer.parseInt(numbers[2]) * gp.tileSize;
-                System.out.println(numbers[0] + " " + x + " " + y);
 
                 switch (numbers[0]) {
                     case "chest":

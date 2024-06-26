@@ -10,13 +10,13 @@ public class Main {
         window.setTitle("Dungeon Game");
 
         GamePanel gamePanel = new GamePanel();
+        gamePanel.setupGame();
+        gamePanel.startGameThread();
+
         window.add(gamePanel);
         window.pack();
 
         window.setLocationRelativeTo(null);
         window.setVisible(true);
-
-        gamePanel.setupGame();
-        gamePanel.startGameThread();
     }
 }
