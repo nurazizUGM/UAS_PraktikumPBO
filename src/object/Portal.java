@@ -11,7 +11,7 @@ public class Portal extends SuperObject {
         this.name = "portal";
         this.x = x;
         this.y = y;
-        this.bounds = new Rectangle(8, 8, 32, 32);
+        this.bounds = new Rectangle(0, 0, 48, 48);
         try {
             image = ImageIO.read(getClass().getResourceAsStream("/resources/objects/portal.png"));
         } catch (Exception e) {

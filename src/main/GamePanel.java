@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import entity.Entity;
 import entity.Player;
 import object.SuperObject;
 import tile.TileManager;
@@ -32,6 +33,7 @@ public class GamePanel extends JPanel implements Runnable {
     public AssetSetter assetSetter = new AssetSetter(this);
     public Player player = new Player(this, keyHandler);
     public SuperObject objects[] = new SuperObject[10];
+    public Entity monsters[] = new Entity[10];
 
     public boolean isPaused = true;
     public boolean isFinished = false;
@@ -46,6 +48,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setupGame() {
         assetSetter.setObject();
+        assetSetter.setMonster();
     }
 
     public void startGameThread() {
@@ -92,6 +95,12 @@ public class GamePanel extends JPanel implements Runnable {
                 objects[i].draw(g2, this);
             }
         }
+        for (int i = 0; i < monsters.length; i++) {
+            if (monsters[i] != null) {
+                monsters[i].draw(g2);
+            }
+        }
+
         player.draw(g2);
         ui.draw(g2);
         g2.dispose();

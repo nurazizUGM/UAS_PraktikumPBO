@@ -13,12 +13,12 @@ import object.Chest;
 import object.SuperObject;
 
 public class Player extends Entity {
-    GamePanel gp;
+    public BufferedImage up1, up2, left1, left2, right1, right2, down1, down2;
     KeyHandler keyHandler;
     public boolean haveWeapon = false;
 
     public Player(GamePanel gp, KeyHandler keyHandler) {
-        this.gp = gp;
+        super(gp);
         this.keyHandler = keyHandler;
 
         x = 50;
@@ -113,9 +113,6 @@ public class Player extends Entity {
     }
 
     public void draw(Graphics2D g2) {
-        // g2.setColor(Color.white);
-        // g2.fillRect(x, y, gp.tileSize, gp.tileSize);
-
         BufferedImage image = null;
         switch (direction) {
             case "up":

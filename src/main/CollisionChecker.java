@@ -68,8 +68,10 @@ public class CollisionChecker {
                 Rectangle objectBounds = new Rectangle(object.x + object.bounds.x,
                         object.y + object.bounds.y, object.bounds.width,
                         object.bounds.height);
-                System.out.println(object.name + "Bounds: " + objectBounds);
-                System.out.println("entityBounds: " + entityBounds);
+
+                // System.out.println(object.name + "Bounds: " + objectBounds);
+                // System.out.println("entityBounds: " + entityBounds);
+
                 switch (entity.direction) {
                     case "up":
                         entityBounds.y -= entity.speed;
