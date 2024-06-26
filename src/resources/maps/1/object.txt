@@ -3,5 +3,5 @@ chest 10 9
 portal 15 5
 portal 15 6
 monster 10 5
-monster 8 5
+monster 7 5
 monster 4 8
