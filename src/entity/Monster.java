@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -11,6 +12,7 @@ import main.GamePanel;
 
 public class Monster extends Entity {
     BufferedImage image1, image2;
+    public boolean isDied = false;
 
     public Monster(GamePanel gp, int x, int y) {
         super(gp);
@@ -20,6 +22,11 @@ public class Monster extends Entity {
         this.x = x;
         this.y = y;
         getImage();
+    }
+
+    public void kill() {
+        isDied = true;
+        collisionOn = false;
     }
 
     public void getImage() {
@@ -32,42 +39,51 @@ public class Monster extends Entity {
     }
 
     public void update() {
-        if (x > gp.player.x) {
-            direction = "left";
-            x -= speed;
-        }
-        if (x < gp.player.x) {
-            direction = "right";
-            x += speed;
-        }
-        if (y > gp.player.y) {
-            direction = "up";
-            y -= speed;
-        }
-        if (y < gp.player.y) {
-            direction = "down";
-            y += speed;
-        }
+        if (!isDied) {
 
-        spriteCounter++;
-        if (spriteCounter > 12) {
-            if (spriteNum == 1) {
-                spriteNum = 2;
-            } else {
-                spriteNum = 1;
+            int randMove = new Random().nextInt(4);
+
+            switch (randMove) {
+                case 0:
+                    direction = "right";
+                    x += speed;
+                    break;
+                case 1:
+                    direction = "left";
+                    x -= speed;
+                    break;
+                case 2:
+                    direction = "up";
+                    y += speed;
+                    break;
+                case 3:
+                    direction = "down";
+                    y -= speed;
+                    break;
             }
-            spriteCounter = 0;
+
+            spriteCounter++;
+            if (spriteCounter > 12) {
+                if (spriteNum == 1) {
+                    spriteNum = 2;
+                } else {
+                    spriteNum = 1;
+                }
+                spriteCounter = 0;
+            }
         }
     }
 
     public void draw(Graphics2D g2) {
-        BufferedImage image = null;
-        if (spriteNum == 1) {
-            image = image1;
-        } else {
-            image = image2;
+        if (!isDied) {
+            BufferedImage image = null;
+            if (spriteNum == 1) {
+                image = image1;
+            } else {
+                image = image2;
+            }
+            g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
         }
-        g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
     }
 
 }

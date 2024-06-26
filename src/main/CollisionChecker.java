@@ -3,6 +3,7 @@ package main;
 import java.awt.Rectangle;
 
 import entity.Entity;
+import entity.Monster;
 import object.SuperObject;
 
 public class CollisionChecker {
@@ -105,5 +106,54 @@ public class CollisionChecker {
             }
         }
         return collidedObject;
+    }
+
+    public Monster checkMonster(Entity entity) {
+        Monster collidedMonster = null;
+        for (int i = 0; i < gp.monsters.length; i++) {
+            Monster monster = gp.monsters[i];
+            if (monster != null && !monster.isDied) {
+                // get entity's bounds
+                Rectangle entityBounds = new Rectangle(entity.bounds.x + entity.x, entity.bounds.y + entity.y,
+                        entity.bounds.width, entity.bounds.height);
+
+                // get monster's bounds
+                Rectangle objectBounds = new Rectangle(monster.x + monster.bounds.x,
+                        monster.y + monster.bounds.y, monster.bounds.width,
+                        monster.bounds.height);
+
+                switch (entity.direction) {
+                    case "up":
+                        entityBounds.y -= entity.speed;
+                        if (entityBounds.intersects(objectBounds)) {
+                            entity.collisionOn = true;
+                            collidedMonster = monster;
+                        }
+                        break;
+                    case "down":
+                        entityBounds.y += entity.speed;
+                        if (entityBounds.intersects(objectBounds)) {
+                            entity.collisionOn = true;
+                            collidedMonster = monster;
+                        }
+                        break;
+                    case "left":
+                        entityBounds.x -= entity.speed;
+                        if (entityBounds.intersects(objectBounds)) {
+                            entity.collisionOn = true;
+                            collidedMonster = monster;
+                        }
+                        break;
+                    case "right":
+                        entityBounds.x += entity.speed;
+                        if (entityBounds.intersects(objectBounds)) {
+                            entity.collisionOn = true;
+                            collidedMonster = monster;
+                        }
+                        break;
+                }
+            }
+        }
+        return collidedMonster;
     }
 }

@@ -36,6 +36,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Monster monsters[] = new Monster[10];
 
     public boolean isPaused = true;
+    public boolean isGameOver = false;
     public boolean isFinished = false;
 
     GamePanel() {
