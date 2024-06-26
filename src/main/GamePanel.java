@@ -58,6 +58,14 @@ public class GamePanel extends JPanel implements Runnable {
         assetSetter.setObject(mapNumber);
     }
 
+    public void restart() {
+        isGameOver = isFinished = isPaused = false;
+        objects.clear();
+        monsters.clear();
+        player.respawn();
+        setupGame();
+    }
+
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();

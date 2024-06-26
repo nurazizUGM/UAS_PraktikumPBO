@@ -21,13 +21,18 @@ public class Player extends Entity {
         super(gp);
         this.keyHandler = keyHandler;
 
-        x = 50;
-        y = 50;
         speed = 2;
         direction = "down";
 
         bounds = new Rectangle(8, 24, 32, 32);
         getImage();
+        respawn();
+    }
+
+    public void respawn() {
+        x = 50;
+        y = 50;
+        haveWeapon = false;
     }
 
     public void getImage() {

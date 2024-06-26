@@ -50,6 +50,12 @@ public class KeyHandler implements KeyListener {
                     break;
             }
         }
+
+        if (gp.isGameOver || gp.isFinished) {
+            if (code == KeyEvent.VK_ENTER) {
+                gp.restart();
+            }
+        }
     }
 
     @Override
