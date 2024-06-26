@@ -82,7 +82,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        if (!isPaused) {
+        if (!isPaused && !isGameOver && !isFinished) {
             player.update();
             for (int i = 0; i < monsters.length; i++) {
                 if (monsters[i] != null) {
