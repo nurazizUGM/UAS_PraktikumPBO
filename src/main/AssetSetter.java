@@ -19,7 +19,6 @@ public class AssetSetter {
         try {
             BufferedReader objectReader = new BufferedReader(
                     Files.newBufferedReader(Paths.get("src/resources/maps/" + mapNumber + "/object.txt")));
-            int i = 0;
             while (true) {
                 String line = objectReader.readLine();
                 if (line == null) {
