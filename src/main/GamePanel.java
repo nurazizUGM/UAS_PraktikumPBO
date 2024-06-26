@@ -27,7 +27,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int maxFps = 60;
 
     public UI ui = new UI(this);
-    Thread gameThread;
+    Thread gameThread = new Thread(this);
     KeyHandler keyHandler = new KeyHandler(this);
 
     public TileManager tileManager = new TileManager(this);
@@ -37,12 +37,14 @@ public class GamePanel extends JPanel implements Runnable {
     public Player player = new Player(this, keyHandler);
     public List<SuperObject> objects = new ArrayList<>();
     public List<Monster> monsters = new ArrayList<>();
+    public int timeElapsed = 0;
+    public int score = 0;
 
     public boolean isMenu = true;
     public boolean isPaused = false;
     public boolean isGameOver = false;
     public boolean isFinished = false;
-    int mapNumber = new Random().nextInt(1, 3);
+    int mapNumber;
 
     GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -54,22 +56,19 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame() {
+        mapNumber = new Random().nextInt(1, 3);
         tileManager.load(mapNumber);
         assetSetter.setObject(mapNumber);
+        player.respawn();
+
+        System.out.println("Game start with map " + mapNumber);
     }
 
     public void restart() {
         isMenu = isPaused = isGameOver = isFinished = false;
-        mapNumber = new Random().nextInt(1, 3);
         objects.clear();
         monsters.clear();
-        player.respawn();
         setupGame();
-    }
-
-    public void startGameThread() {
-        gameThread = new Thread(this);
-        gameThread.start();
     }
 
     @Override
