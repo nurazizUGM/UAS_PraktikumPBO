@@ -25,6 +25,31 @@ public class KeyHandler implements KeyListener {
         } else if (code == KeyEvent.VK_ESCAPE) {
             gp.isPaused = !gp.isPaused;
         }
+
+        if (gp.isMenu) {
+            switch (code) {
+                case KeyEvent.VK_W:
+                    gp.ui.menu--;
+                    if (gp.ui.menu < 0) {
+                        gp.ui.menu = 1;
+                    }
+                    break;
+                case KeyEvent.VK_S:
+                    gp.ui.menu++;
+                    if (gp.ui.menu > 1) {
+                        gp.ui.menu = 0;
+                    }
+                    break;
+
+                case KeyEvent.VK_ENTER:
+                    if (gp.ui.menu == 0) {
+                        gp.isMenu = false;
+                    } else if (gp.ui.menu == 1) {
+                        System.exit(0);
+                    }
+                    break;
+            }
+        }
     }
 
     @Override

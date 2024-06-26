@@ -25,7 +25,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenHeight = tileSize * maxScreenRow;
     public final int maxFps = 60;
 
-    UI ui = new UI(this);
+    public UI ui = new UI(this);
     Thread gameThread;
     KeyHandler keyHandler = new KeyHandler(this);
 
@@ -37,7 +37,8 @@ public class GamePanel extends JPanel implements Runnable {
     public List<SuperObject> objects = new ArrayList<>();
     public List<Monster> monsters = new ArrayList<>();
 
-    public boolean isPaused = true;
+    public boolean isMenu = true;
+    public boolean isPaused = false;
     public boolean isGameOver = false;
     public boolean isFinished = false;
 
@@ -83,7 +84,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        if (!isPaused && !isGameOver && !isFinished) {
+        if (!isPaused && !isGameOver && !isFinished && !isMenu) {
             player.update();
             monsters.forEach(m -> m.update());
         }
@@ -92,11 +93,14 @@ public class GamePanel extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        tileManager.draw(g2);
-        objects.forEach(o -> o.draw(g2, this));
-        monsters.forEach(m -> m.draw(g2));
 
-        player.draw(g2);
+        if (!isMenu) {
+            tileManager.draw(g2);
+            objects.forEach(o -> o.draw(g2, this));
+            monsters.forEach(m -> m.draw(g2));
+            player.draw(g2);
+        }
+
         ui.draw(g2);
         g2.dispose();
     }
