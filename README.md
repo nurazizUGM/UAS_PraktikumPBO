@@ -30,3 +30,9 @@ Keadaan permainan diperbarui di kelas `GamePanel`, yang menangani deteksi tabrak
 -   Tambahkan layar kemenangan.
 -   Tambahkan sistem menu yang lebih baik.
 -   Tambahkan lebih banyak level.
+
+## Tim Pengembang
+
+-   Naufal Rahmanu
+-   Nur Aziz
+-   Sabili Fathurozaq
