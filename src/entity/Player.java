@@ -99,6 +99,7 @@ public class Player extends Entity implements Action {
             if (haveWeapon) {
                 attack(collidedMonster);
                 gp.score += 50;
+                gp.killedMonsters++;
             } else {
                 HP--;
             }

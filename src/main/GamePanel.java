@@ -85,7 +85,7 @@ public class GamePanel extends JPanel implements Runnable {
         long nextFrameTime = System.currentTimeMillis() + 1000;
         // int frames = 0;
         while (gameThread != null) {
-            if (isFinished && finalScore == -1) {
+            if (isFinished && finalScore == -1 && timeElapsed != 0) {
                 finalScore = score * 10000 / timeElapsed / 60;
             }
 
