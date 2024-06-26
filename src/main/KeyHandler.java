@@ -26,34 +26,43 @@ public class KeyHandler implements KeyListener {
             gp.isPaused = !gp.isPaused;
         }
 
-        if (gp.isMenu) {
+        if (gp.isMenu || gp.isGameOver || gp.isFinished) {
             switch (code) {
-                case KeyEvent.VK_W:
+                case KeyEvent.VK_W, KeyEvent.VK_UP:
                     gp.ui.menu--;
                     if (gp.ui.menu < 0) {
                         gp.ui.menu = 1;
                     }
                     break;
-                case KeyEvent.VK_S:
+                case KeyEvent.VK_S, KeyEvent.VK_DOWN:
                     gp.ui.menu++;
                     if (gp.ui.menu > 1) {
                         gp.ui.menu = 0;
                     }
                     break;
 
-                case KeyEvent.VK_ENTER:
-                    if (gp.ui.menu == 0) {
-                        gp.isMenu = false;
-                    } else if (gp.ui.menu == 1) {
-                        System.exit(0);
-                    }
+                case KeyEvent.VK_ENTER, KeyEvent.VK_SPACE:
+                    gp.ui.action();
                     break;
             }
-        }
+        } else if (gp.isPaused) {
+            switch (code) {
+                case KeyEvent.VK_W, KeyEvent.VK_UP:
+                    gp.ui.menu--;
+                    if (gp.ui.menu < 0) {
+                        gp.ui.menu = 1;
+                    }
+                    break;
+                case KeyEvent.VK_S, KeyEvent.VK_DOWN:
+                    gp.ui.menu++;
+                    if (gp.ui.menu > 2) {
+                        gp.ui.menu = 0;
+                    }
+                    break;
 
-        if (gp.isGameOver || gp.isFinished) {
-            if (code == KeyEvent.VK_ENTER) {
-                gp.restart();
+                case KeyEvent.VK_ENTER, KeyEvent.VK_SPACE:
+                    gp.ui.action();
+                    break;
             }
         }
     }

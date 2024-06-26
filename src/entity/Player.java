@@ -12,7 +12,7 @@ import main.KeyHandler;
 import object.Chest;
 import object.SuperObject;
 
-public class Player extends Entity {
+public class Player extends Entity implements Action {
     public BufferedImage up1, up2, left1, left2, right1, right2, down1, down2;
     KeyHandler keyHandler;
     public boolean haveWeapon = false;
@@ -29,9 +29,15 @@ public class Player extends Entity {
         respawn();
     }
 
+    public void attack(Entity entity) {
+        Monster monster = (Monster) entity;
+        monster.kill();
+    }
+
     public void respawn() {
         x = 50;
         y = 50;
+        isDied = false;
         haveWeapon = false;
     }
 
@@ -90,9 +96,9 @@ public class Player extends Entity {
         Monster collidedMonster = gp.collisionChecker.checkMonster(this);
         if (collidedMonster != null) {
             if (haveWeapon) {
-                collidedMonster.kill();
+                attack(collidedMonster);
             } else {
-                gp.isGameOver = true;
+                isDied = true;
             }
         }
 

@@ -12,6 +12,7 @@ public abstract class Entity {
     public int spriteNum = 1;
     public Rectangle bounds;
     public boolean collisionOn = false;
+    public boolean isDied = false;
 
     GamePanel gp;
 

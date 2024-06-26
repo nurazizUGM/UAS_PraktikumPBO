@@ -59,7 +59,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void restart() {
-        isGameOver = isFinished = isPaused = false;
+        isMenu = isPaused = isGameOver = isFinished = false;
         mapNumber = new Random().nextInt(1, 3);
         objects.clear();
         monsters.clear();
@@ -100,6 +100,9 @@ public class GamePanel extends JPanel implements Runnable {
         if (!isPaused && !isGameOver && !isFinished && !isMenu) {
             player.update();
             monsters.forEach(m -> m.update());
+        }
+        if (player.isDied) {
+            isGameOver = true;
         }
     }
 

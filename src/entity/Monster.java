@@ -12,7 +12,6 @@ import main.GamePanel;
 
 public class Monster extends Entity {
     BufferedImage image1, image2;
-    public boolean isDied = false;
 
     public Monster(GamePanel gp, int x, int y) {
         super(gp);

@@ -15,25 +15,72 @@ public class UI {
 
     public void draw(Graphics2D g2) {
         if (gp.isPaused) {
+            int y = gp.tileSize * 4;
             g2.setFont(arial_40);
             g2.setColor(Color.white);
-            String message = "PAUSED";
-            g2.drawString(message, getCenteredX(message, g2),
-                    gp.screenHeight / 2 + g2.getFontMetrics().getHeight() / 4);
-            message = "Press ESC to resume";
-            g2.drawString(message, getCenteredX(message, g2), gp.screenHeight / 2 + g2.getFontMetrics().getHeight());
+            String message = "Paused";
+            g2.drawString(message, getCenteredX(message, g2), y);
+
+            y += gp.tileSize * 2;
+            message = "Resume";
+            g2.drawString(message, getCenteredX(message, g2), y);
+            if (menu == 0) {
+                g2.drawString(">", getCenteredX(message, g2) - 30, y);
+            }
+
+            y += gp.tileSize;
+            message = "New Game";
+            g2.drawString(message, getCenteredX(message, g2), y);
+            if (menu == 1) {
+                g2.drawString(">", getCenteredX(message, g2) - 30, y);
+            }
+
+            y += gp.tileSize;
+            message = "Quit";
+            g2.drawString(message, getCenteredX(message, g2), y);
+            if (menu == 2) {
+                g2.drawString(">", getCenteredX(message, g2) - 30, y);
+            }
         } else if (gp.isFinished) {
+            int y = gp.tileSize * 4;
             g2.setFont(arial_40);
             g2.setColor(Color.white);
-            String message = "FINISHED";
-            g2.drawString(message, getCenteredX(message, g2),
-                    gp.screenHeight / 2 + g2.getFontMetrics().getHeight() / 4);
+            String message = "You Win!";
+            g2.drawString(message, getCenteredX(message, g2), y);
+
+            y += gp.tileSize * 2;
+            message = "New Game";
+            g2.drawString(message, getCenteredX(message, g2), y);
+            if (menu == 0) {
+                g2.drawString(">", getCenteredX(message, g2) - 30, y);
+            }
+
+            y += gp.tileSize;
+            message = "Quit";
+            g2.drawString(message, getCenteredX(message, g2), y);
+            if (menu == 1) {
+                g2.drawString(">", getCenteredX(message, g2) - 30, y);
+            }
         } else if (gp.isGameOver) {
+            int y = gp.tileSize * 4;
             g2.setFont(arial_40);
             g2.setColor(Color.white);
-            String message = "GAME OVER";
-            g2.drawString(message, getCenteredX(message, g2),
-                    gp.screenHeight / 2 + g2.getFontMetrics().getHeight() / 4);
+            String message = "Game Over";
+            g2.drawString(message, getCenteredX(message, g2), y);
+
+            y += gp.tileSize * 2;
+            message = "New Game";
+            g2.drawString(message, getCenteredX(message, g2), y);
+            if (menu == 0) {
+                g2.drawString(">", getCenteredX(message, g2) - 30, y);
+            }
+
+            y += gp.tileSize;
+            message = "Quit";
+            g2.drawString(message, getCenteredX(message, g2), y);
+            if (menu == 1) {
+                g2.drawString(">", getCenteredX(message, g2) - 30, y);
+            }
         } else if (gp.isMenu) {
             int y = gp.tileSize * 4;
             g2.setFont(arial_40);
@@ -54,6 +101,28 @@ public class UI {
             if (menu == 1) {
                 g2.drawString(">", getCenteredX(message, g2) - 30, y);
             }
+        }
+    }
+
+    public void action() {
+        switch (menu) {
+            case 0:
+                if (gp.isPaused) {
+                    gp.isPaused = false;
+                } else {
+                    gp.restart();
+                }
+                break;
+            case 1:
+                if (gp.isPaused) {
+                    gp.restart();
+                } else {
+                    System.exit(0);
+                }
+                break;
+            case 2:
+                System.exit(0);
+                break;
         }
     }
 
