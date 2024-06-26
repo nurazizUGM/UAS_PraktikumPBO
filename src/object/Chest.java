@@ -4,7 +4,7 @@ import javax.imageio.ImageIO;
 
 import entity.Player;
 
-public class Chest extends SuperObject {
+public class Chest extends Object {
     public boolean isOpen = false;
     public boolean collision = true;
 

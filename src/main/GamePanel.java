@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 import entity.Monster;
 import entity.Player;
-import object.SuperObject;
+import object.Object;
 import tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable {
@@ -35,7 +35,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public AssetSetter assetSetter = new AssetSetter(this);
     public Player player = new Player(this, keyHandler);
-    public List<SuperObject> objects = new ArrayList<>();
+    public List<Object> objects = new ArrayList<>();
     public List<Monster> monsters = new ArrayList<>();
     public int timeElapsed = 0;
     public int score = 0;
@@ -57,7 +57,6 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame() {
-
         mapNumber = new Random().nextInt(1, 3);
         tileManager.load(mapNumber);
         assetSetter.setObject(mapNumber);
@@ -65,12 +64,13 @@ public class GamePanel extends JPanel implements Runnable {
 
         score = timeElapsed = 0;
         finalScore = -1;
-        isMenu = isPaused = isGameOver = isFinished = false;
+        isPaused = isGameOver = isFinished = false;
 
         System.out.println("Game start with map " + mapNumber);
     }
 
     public void restart() {
+        isMenu = false;
         objects.clear();
         monsters.clear();
         setupGame();
@@ -110,7 +110,7 @@ public class GamePanel extends JPanel implements Runnable {
             player.update();
             monsters.forEach(m -> m.update());
         }
-        if (player.isDied) {
+        if (player.HP == 0) {
             isGameOver = true;
         }
     }

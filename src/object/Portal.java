@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 
 import javax.imageio.ImageIO;
 
-public class Portal extends SuperObject {
+public class Portal extends Object {
     public boolean collision = true;
 
     public Portal(int x, int y) {

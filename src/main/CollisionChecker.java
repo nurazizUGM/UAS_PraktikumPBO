@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 
 import entity.Entity;
 import entity.Monster;
-import object.SuperObject;
+import object.Object;
 
 public class CollisionChecker {
     GamePanel gp;
@@ -56,9 +56,9 @@ public class CollisionChecker {
         }
     }
 
-    public SuperObject checkObject(Entity entity) {
-        SuperObject collidedObject = null;
-        for (SuperObject object : gp.objects) {
+    public Object checkObject(Entity entity) {
+        Object collidedObject = null;
+        for (Object object : gp.objects) {
             if (object != null) {
                 // get entity's bounds
                 Rectangle entityBounds = new Rectangle(entity.bounds.x + entity.x, entity.bounds.y + entity.y,
@@ -107,7 +107,7 @@ public class CollisionChecker {
     public Monster checkMonster(Entity entity) {
         Monster collidedMonster = null;
         for (Monster monster : gp.monsters) {
-            if (monster != null && !monster.isDied) {
+            if (monster != null && monster.HP > 0) {
                 // get entity's bounds
                 Rectangle entityBounds = new Rectangle(entity.bounds.x + entity.x, entity.bounds.y + entity.y,
                         entity.bounds.width, entity.bounds.height);

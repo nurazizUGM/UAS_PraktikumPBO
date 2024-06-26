@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 import object.Chest;
-import object.SuperObject;
+import object.Object;
 
 public class Player extends Entity implements Action {
     public BufferedImage up1, up2, left1, left2, right1, right2, down1, down2;
@@ -35,7 +35,8 @@ public class Player extends Entity implements Action {
     }
 
     public void respawn() {
-        isDied = haveWeapon = false;
+        HP = 1;
+        haveWeapon = false;
         x = 50;
         y = 50;
     }
@@ -73,7 +74,7 @@ public class Player extends Entity implements Action {
 
         collisionOn = false;
         gp.collisionChecker.checkTile(this);
-        SuperObject collidedObject = gp.collisionChecker.checkObject(this);
+        Object collidedObject = gp.collisionChecker.checkObject(this);
 
         // check if the player collides with an object
         if (collidedObject != null) {
@@ -99,7 +100,7 @@ public class Player extends Entity implements Action {
                 attack(collidedMonster);
                 gp.score += 50;
             } else {
-                isDied = true;
+                HP--;
             }
         }
 

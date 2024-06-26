@@ -27,7 +27,7 @@ public class Monster extends Entity {
     }
 
     public void kill() {
-        isDied = true;
+        HP = 0;
     }
 
     public void getImage() {
@@ -40,7 +40,7 @@ public class Monster extends Entity {
     }
 
     public void update() {
-        if (!isDied) {
+        if (HP > 0) {
             gp.collisionChecker.checkTile(this);
             gp.collisionChecker.checkObject(this);
             if (!collisionOn) {
@@ -88,7 +88,7 @@ public class Monster extends Entity {
     }
 
     public void draw(Graphics2D g2) {
-        if (!isDied) {
+        if (HP > 0) {
             BufferedImage image = null;
             if (spriteNum == 1) {
                 image = image1;
