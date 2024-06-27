@@ -5,3 +5,4 @@ portal 15 6
 monster 10 5
 monster 7 5
 monster 4 8
+monster 2 4
