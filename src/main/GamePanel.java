@@ -50,6 +50,7 @@ public class GamePanel extends JPanel implements Runnable {
     public boolean isPaused = false;
     public boolean isGameOver = false;
     public boolean isFinished = false;
+    public AudioPlayer backsound;
     int mapNumber;
 
     GamePanel() {
@@ -81,6 +82,9 @@ public class GamePanel extends JPanel implements Runnable {
         isPaused = isGameOver = isFinished = false;
 
         System.out.println("Game start with map " + mapNumber);
+        if (backsound == null) {
+            backsound = AudioPlayer.playFile("19. Graveyard.wav");
+        }
     }
 
     public void restart() {
@@ -88,6 +92,7 @@ public class GamePanel extends JPanel implements Runnable {
         objects.clear();
         monsters.clear();
         setupGame();
+        backsound.restart();
     }
 
     @Override
@@ -122,7 +127,6 @@ public class GamePanel extends JPanel implements Runnable {
                 // System.out.println("FPS: " + frames);
                 // frames = 0;
             }
-
         }
     }
 
