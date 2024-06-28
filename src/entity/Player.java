@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import main.AudioPlayer;
 import main.GamePanel;
 import main.KeyHandler;
 import object.Chest;
@@ -16,6 +17,7 @@ public class Player extends Entity implements Action {
     public BufferedImage up1, up2, left1, left2, right1, right2, down1, down2;
     KeyHandler keyHandler;
     public boolean haveWeapon = false;
+    private AudioPlayer walkingSound;
 
     public Player(GamePanel gp, KeyHandler keyHandler) {
         super(gp);
@@ -26,6 +28,7 @@ public class Player extends Entity implements Action {
 
         bounds = new Rectangle(8, 24, 32, 32);
         getImage();
+        walkingSound = AudioPlayer.playFile("walking.wav", false);
         respawn();
     }
 
@@ -119,6 +122,14 @@ public class Player extends Entity implements Action {
                 case "right":
                     x += speed;
                     break;
+            }
+
+            if (walkingSound.isPaused()) {
+                walkingSound.resumeAudio();
+            }
+        } else {
+            if (!walkingSound.isPaused()) {
+                walkingSound.pause();
             }
         }
 

@@ -83,7 +83,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         System.out.println("Game start with map " + mapNumber);
         if (backsound == null) {
-            backsound = AudioPlayer.playFile("19. Graveyard.wav");
+            backsound = AudioPlayer.playFile("19. Graveyard.wav", true);
         }
     }
 

@@ -4,13 +4,14 @@ import java.io.File;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;;
 
 public class AudioPlayer {
 
     Long currentFrame;
     Clip clip;
-    private String status;
+    private String status = "paused";
     AudioInputStream audioInputStream;
     static String filePath;
 
@@ -19,17 +20,24 @@ public class AudioPlayer {
             audioInputStream = AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl.setValue(-25.0f);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public static AudioPlayer playFile(String filename) {
+        return playFile(filename, true);
+    }
+
+    public static AudioPlayer playFile(String filename, boolean play) {
         try {
             filePath = "src/resources/sounds/" + filename;
             AudioPlayer audioPlayer = new AudioPlayer();
-            audioPlayer.play();
+            if (play) {
+                audioPlayer.play();
+            }
             return audioPlayer;
         }
 
