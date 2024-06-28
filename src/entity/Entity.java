@@ -12,7 +12,7 @@ public abstract class Entity {
     public int spriteNum = 1;
     public Rectangle bounds;
     public boolean collisionOn = false;
-    public int HP = 1;
+    private int HP = 1;
 
     GamePanel gp;
 
@@ -21,4 +21,16 @@ public abstract class Entity {
     }
 
     public abstract void draw(Graphics2D g2);
+
+    public boolean isAlive() {
+        return HP > 0;
+    }
+
+    public void respawn() {
+        HP = 1;
+    }
+
+    public void kill() {
+        HP = 0;
+    }
 }

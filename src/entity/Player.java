@@ -35,7 +35,7 @@ public class Player extends Entity implements Action {
     }
 
     public void respawn() {
-        HP = 1;
+        super.respawn();
         haveWeapon = false;
         x = 50;
         y = 50;
@@ -101,7 +101,7 @@ public class Player extends Entity implements Action {
                 gp.score += 50;
                 gp.killedMonsters++;
             } else {
-                HP--;
+                kill();
             }
         }
 

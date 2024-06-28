@@ -107,7 +107,7 @@ public class CollisionChecker {
     public Monster checkMonster(Entity entity) {
         Monster collidedMonster = null;
         for (Monster monster : gp.monsters) {
-            if (monster != null && monster.HP > 0) {
+            if (monster != null && monster.isAlive()) {
                 // get entity's bounds
                 Rectangle entityBounds = new Rectangle(entity.bounds.x + entity.x, entity.bounds.y + entity.y,
                         entity.bounds.width, entity.bounds.height);

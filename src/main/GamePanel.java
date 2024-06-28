@@ -62,7 +62,8 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame() {
-        mapNumber = new Random().nextInt(1, 3);
+        mapNumber = new Random().nextInt(1, 4);
+        // mapNumber = 3;
         tileManager.load(mapNumber);
         assetSetter.setObject(mapNumber);
         player.respawn();
@@ -130,7 +131,7 @@ public class GamePanel extends JPanel implements Runnable {
             player.update();
             monsters.forEach(m -> m.update());
         }
-        if (player.HP == 0) {
+        if (!player.isAlive()) {
             isGameOver = true;
         }
     }

@@ -26,10 +26,6 @@ public class Monster extends Entity {
         speed = 1;
     }
 
-    public void kill() {
-        HP = 0;
-    }
-
     public void getImage() {
         try {
             image1 = ImageIO.read(getClass().getResourceAsStream("/resources/monster/monster_1.png"));
@@ -40,7 +36,7 @@ public class Monster extends Entity {
     }
 
     public void update() {
-        if (HP > 0) {
+        if (isAlive()) {
             gp.collisionChecker.checkTile(this);
             gp.collisionChecker.checkObject(this);
             if (!collisionOn) {
@@ -88,7 +84,7 @@ public class Monster extends Entity {
     }
 
     public void draw(Graphics2D g2) {
-        if (HP > 0) {
+        if (isAlive()) {
             BufferedImage image = null;
             if (spriteNum == 1) {
                 image = image1;
